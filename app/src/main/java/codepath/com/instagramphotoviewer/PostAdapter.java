@@ -1,18 +1,13 @@
 package codepath.com.instagramphotoviewer;
 
 import android.content.Context;
-import android.media.Image;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.net.URI;
+import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class PostAdapter extends ArrayAdapter<Post> {
@@ -34,10 +29,10 @@ public class PostAdapter extends ArrayAdapter<Post> {
         ImageView photo = (ImageView) convertView.findViewById(R.id.ivPhoto);
         TextView numLikes = (TextView) convertView.findViewById(R.id.tvLikes);
 
-        avatar.setImageURI(Uri.parse(post.getAvatarUrl()));
+        Picasso.with(getContext()).load(post.getAvatarUrl()).into(avatar);
         username.setText(post.getUsername());
         postAge.setText(post.getCreatedTime()); // TODO formatting
-        photo.setImageURI(Uri.parse(post.getPhotoUrl()));
+        Picasso.with(getContext()).load(post.getPhotoUrl()).into(photo);
         numLikes.setText(post.getNumLikes() + " likes");
 
         return convertView;
