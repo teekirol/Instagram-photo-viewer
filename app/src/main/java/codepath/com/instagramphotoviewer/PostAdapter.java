@@ -38,7 +38,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
         username.setText(post.getUsername());
         postAge.setText(post.getCreatedTime()); // TODO formatting
         photo.setImageURI(Uri.parse(post.getPhotoUrl()));
-        numLikes.setText(post.getNumLikes());
+        numLikes.setText(post.getNumLikes() + " likes");
 
         return convertView;
     }
