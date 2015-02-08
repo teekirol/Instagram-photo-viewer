@@ -1,6 +1,7 @@
 package codepath.com.instagramphotoviewer;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.makeramen.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import org.w3c.dom.Text;
 
@@ -38,7 +42,12 @@ public class PostAdapter extends ArrayAdapter<Post> {
         TextView captionText = (TextView) convertView.findViewById(R.id.tvCaptionText);
         ImageView pin = (ImageView) convertView.findViewById(R.id.ivPin);
 
-        Picasso.with(getContext()).load(post.getAvatarUrl()).into(avatar);
+        Transformation transformation = new RoundedTransformationBuilder()
+            .oval(true)
+            .build();
+
+        Picasso.with(getContext()).load(post.getAvatarUrl()).fit().transform(transformation).into(avatar);
+
         username.setText(post.getUsername());
         postAge.setText(post.getCreatedTime());
         locationName.setText(post.getLocationName());
