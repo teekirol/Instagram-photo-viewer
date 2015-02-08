@@ -25,39 +25,54 @@ public class PostAdapter extends ArrayAdapter<Post> {
         super(c, 0, posts);
     }
 
+    private static class ViewHolder {
+        ImageView avatar;
+        TextView username;
+        TextView postAge;
+        TextView locationName;
+        ImageView photo;
+        TextView numLikes;
+        TextView captionText;
+        ImageView pin;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Post post = getItem(position);
-        // TODO Use ViewHolder pattern
-        if(convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.post_item, parent, false);
-        }
 
-        ImageView avatar = (ImageView) convertView.findViewById(R.id.ivAvatar);
-        TextView username = (TextView) convertView.findViewById(R.id.tvUsername);
-        TextView postAge = (TextView) convertView.findViewById(R.id.tvPostAge);
-        TextView locationName = (TextView) convertView.findViewById(R.id.tvLocationName);
-        ImageView photo = (ImageView) convertView.findViewById(R.id.ivPhoto);
-        TextView numLikes = (TextView) convertView.findViewById(R.id.tvLikes);
-        TextView captionText = (TextView) convertView.findViewById(R.id.tvCaptionText);
-        ImageView pin = (ImageView) convertView.findViewById(R.id.ivPin);
+        ViewHolder viewHolder;
+
+        if(convertView == null) {
+            viewHolder = new ViewHolder();
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.post_item, parent, false);
+            viewHolder.avatar = (ImageView) convertView.findViewById(R.id.ivAvatar);
+            viewHolder.username = (TextView) convertView.findViewById(R.id.tvUsername);
+            viewHolder.postAge = (TextView) convertView.findViewById(R.id.tvPostAge);
+            viewHolder.locationName = (TextView) convertView.findViewById(R.id.tvLocationName);
+            viewHolder.photo = (ImageView) convertView.findViewById(R.id.ivPhoto);
+            viewHolder.numLikes = (TextView) convertView.findViewById(R.id.tvLikes);
+            viewHolder.captionText = (TextView) convertView.findViewById(R.id.tvCaptionText);
+            viewHolder.pin = (ImageView) convertView.findViewById(R.id.ivPin);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
 
         Transformation transformation = new RoundedTransformationBuilder()
             .oval(true)
             .build();
 
-        Picasso.with(getContext()).load(post.getAvatarUrl()).fit().transform(transformation).into(avatar);
+        Picasso.with(getContext()).load(post.getAvatarUrl()).fit().transform(transformation).into(viewHolder.avatar);
 
-        username.setText(post.getUsername());
-        postAge.setText(post.getCreatedTime());
-        locationName.setText(post.getLocationName());
-        Picasso.with(getContext()).load(post.getPhotoUrl()).into(photo);
-        captionText.setText(Html.fromHtml("<b><font color='#1c5380'>" + post.getUsername() + "</font></b> " + post.getCaption()));
-        numLikes.setText(post.getNumLikes() + " likes");
+        viewHolder.username.setText(post.getUsername());
+        viewHolder.postAge.setText(post.getCreatedTime());
+        viewHolder.locationName.setText(post.getLocationName());
+        Picasso.with(getContext()).load(post.getPhotoUrl()).into(viewHolder.photo);
+        viewHolder.captionText.setText(Html.fromHtml("<b><font color='#1c5380'>" + post.getUsername() + "</font></b> " + post.getCaption()));
+        viewHolder.numLikes.setText(post.getNumLikes() + " likes");
         if(post.getLocationName() == null) {
-            pin.setVisibility(View.INVISIBLE);
+            viewHolder.pin.setVisibility(View.INVISIBLE);
         }
-
 
         return convertView;
     }
