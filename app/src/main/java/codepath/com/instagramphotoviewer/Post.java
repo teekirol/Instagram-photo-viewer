@@ -16,6 +16,7 @@ public class Post {
     public String caption;
     public String photoUrl;
     public int numLikes;
+    public String locationName;
 
     private static final int WEEKS_IN_A_YEAR = 52;
     private static final int WEEKS_IN_A_MONTH = 4;
@@ -130,6 +131,14 @@ public class Post {
 
     public void setNumLikes(int numLikes) {
         this.numLikes = numLikes;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
 }
