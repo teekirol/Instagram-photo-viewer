@@ -2,12 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
 
     <ImageView
         android:id="@+id/ivAvatar"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:contentDescription="avatar"
         android:src="@drawable/ic_launcher"
         android:layout_alignParentLeft="true"/>
     <TextView
@@ -28,22 +31,50 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:textColor="#999999"
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:layout_alignBottom="@id/ivAvatar"
+        android:layout_alignTop="@id/ivAvatar"
         android:text="10h"/>
+    <ImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/clock_icon"
+        android:layout_toLeftOf="@id/tvPostAge"
+        android:layout_marginRight="5dp"
+        android:layout_alignBottom="@id/ivAvatar"
+        android:layout_alignTop="@id/ivAvatar"/>
     <ImageView
         android:id="@+id/ivPhoto"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
         android:layout_below="@id/ivAvatar"
         android:layout_marginTop="20dp"
-        android:src="@drawable/ic_launcher"/>
+        android:src="@drawable/ic_launcher"
+        android:adjustViewBounds="true"
+        android:layout_marginBottom="20dp"/>
+    <ImageView
+        android:id="@+id/heart"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:src="@drawable/heart_icon"
+        android:layout_below="@id/ivPhoto"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"/>
     <TextView
         android:id="@+id/tvLikes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/heart"
         android:layout_below="@id/ivPhoto"
+        android:layout_marginLeft="7dp"
+        android:layout_alignTop="@id/heart"
+        android:layout_alignBottom="@id/heart"
+        android:gravity="center"
         android:textColor="#1c5380"
         android:textStyle="bold"
+        android:textSize="14sp"
         android:text="10 likes"/>
 
 </RelativeLayout>
