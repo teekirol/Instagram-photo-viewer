@@ -71,7 +71,11 @@ public class PostAdapter extends ArrayAdapter<Post> {
         viewHolder.captionText.setText(Html.fromHtml("<b><font color='#1c5380'>" + post.getUsername() + "</font></b> " + post.getCaption()));
         viewHolder.numLikes.setText(post.getNumLikes() + " likes");
         if(post.getLocationName() == null) {
-            viewHolder.pin.setVisibility(View.INVISIBLE);
+            viewHolder.pin.setVisibility(View.GONE);
+            viewHolder.locationName.setVisibility(View.GONE);
+        } else {
+            viewHolder.pin.setVisibility(View.VISIBLE);
+            viewHolder.locationName.setVisibility(View.VISIBLE);
         }
 
         return convertView;
