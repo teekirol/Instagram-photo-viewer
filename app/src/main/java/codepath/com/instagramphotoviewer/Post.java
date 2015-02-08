@@ -44,6 +44,9 @@ public class Post {
             JSONObject likes = object.getJSONObject("likes");
             this.numLikes = likes.getInt("count");
 
+            JSONObject location = object.getJSONObject("location");
+            this.locationName = location.getString("name");
+
         } catch(JSONException e) {
             e.printStackTrace();
         }

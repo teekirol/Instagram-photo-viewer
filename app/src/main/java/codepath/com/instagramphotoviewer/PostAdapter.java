@@ -1,6 +1,7 @@
 package codepath.com.instagramphotoviewer;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class PostAdapter extends ArrayAdapter<Post> {
@@ -23,17 +27,29 @@ public class PostAdapter extends ArrayAdapter<Post> {
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.post_item, parent, false);
         }
+
         ImageView avatar = (ImageView) convertView.findViewById(R.id.ivAvatar);
         TextView username = (TextView) convertView.findViewById(R.id.tvUsername);
         TextView postAge = (TextView) convertView.findViewById(R.id.tvPostAge);
+        TextView locationName = (TextView) convertView.findViewById(R.id.tvLocationName);
         ImageView photo = (ImageView) convertView.findViewById(R.id.ivPhoto);
         TextView numLikes = (TextView) convertView.findViewById(R.id.tvLikes);
+        TextView captionAuthor = (TextView) convertView.findViewById(R.id.tvCaptionUsername);
+        TextView captionText = (TextView) convertView.findViewById(R.id.tvCaptionText);
+        ImageView pin = (ImageView) convertView.findViewById(R.id.ivPin);
 
         Picasso.with(getContext()).load(post.getAvatarUrl()).into(avatar);
         username.setText(post.getUsername());
-        postAge.setText(post.getCreatedTime()); // TODO formatting
+        postAge.setText(post.getCreatedTime());
+        locationName.setText(post.getLocationName());
         Picasso.with(getContext()).load(post.getPhotoUrl()).into(photo);
+        captionAuthor.setText(post.getUsername());
+        captionText.setText(post.getCaption());
         numLikes.setText(post.getNumLikes() + " likes");
+        if(post.getLocationName() == null) {
+            pin.setVisibility(View.INVISIBLE);
+        }
+
 
         return convertView;
     }
