@@ -3,6 +3,7 @@ package codepath.com.instagramphotoviewer;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.Image;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,6 @@ public class PostAdapter extends ArrayAdapter<Post> {
         TextView locationName = (TextView) convertView.findViewById(R.id.tvLocationName);
         ImageView photo = (ImageView) convertView.findViewById(R.id.ivPhoto);
         TextView numLikes = (TextView) convertView.findViewById(R.id.tvLikes);
-        TextView captionAuthor = (TextView) convertView.findViewById(R.id.tvCaptionUsername);
         TextView captionText = (TextView) convertView.findViewById(R.id.tvCaptionText);
         ImageView pin = (ImageView) convertView.findViewById(R.id.ivPin);
 
@@ -52,8 +52,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
         postAge.setText(post.getCreatedTime());
         locationName.setText(post.getLocationName());
         Picasso.with(getContext()).load(post.getPhotoUrl()).into(photo);
-        captionAuthor.setText(post.getUsername());
-        captionText.setText(post.getCaption());
+        captionText.setText(Html.fromHtml("<b><font color='#1c5380'>" + post.getUsername() + "</font></b> " + post.getCaption()));
         numLikes.setText(post.getNumLikes() + " likes");
         if(post.getLocationName() == null) {
             pin.setVisibility(View.INVISIBLE);
