@@ -50,10 +50,10 @@
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
         android:layout_below="@id/ivAvatar"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/ic_launcher"
         android:adjustViewBounds="true"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="15dp"/>
     <ImageView
         android:id="@+id/heart"
         android:layout_width="14dp"
@@ -70,7 +70,6 @@
         android:layout_below="@id/ivPhoto"
         android:layout_marginLeft="7dp"
         android:layout_alignTop="@id/heart"
-        android:layout_alignBottom="@id/heart"
         android:gravity="center"
         android:textColor="#1c5380"
         android:textStyle="bold"

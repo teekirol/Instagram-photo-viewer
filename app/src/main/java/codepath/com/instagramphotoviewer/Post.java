@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.jar.JarException;
 
@@ -91,8 +92,9 @@ public class Post {
         this.photoUrl = photoUrl;
     }
 
-    public int getNumLikes() {
-        return numLikes;
+    public String getNumLikes() {
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        return formatter.format(numLikes);
     }
 
     public void setNumLikes(int numLikes) {
