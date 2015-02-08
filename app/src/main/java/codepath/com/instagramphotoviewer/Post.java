@@ -17,6 +17,8 @@ public class Post {
     public String photoUrl;
     public int numLikes;
     public String locationName;
+    public int numComments;
+    public ArrayList<JSONObject> latestComments;
 
     private static final int WEEKS_IN_A_YEAR = 52;
     private static final int WEEKS_IN_A_MONTH = 4;
@@ -26,12 +28,16 @@ public class Post {
     private static final String MINUTES_SUFFIX = "m";
     private static final String SECONDS_SUFFIX = "s";
 
+    private static final int NUM_DISPLAY_COMMENTS = 5;
+
+    private DecimalFormat formatter = new DecimalFormat("#,###");
 
     public Post(JSONObject object) {
         try {
 
             JSONObject user = object.getJSONObject("user");
             this.username = user.getString("username");
+            System.out.println(this.username);
             this.avatarUrl = user.getString("profile_picture");
 
             JSONObject caption = object.getJSONObject("caption");
@@ -44,8 +50,17 @@ public class Post {
             JSONObject likes = object.getJSONObject("likes");
             this.numLikes = likes.getInt("count");
 
-            JSONObject location = object.getJSONObject("location");
-            this.locationName = location.getString("name");
+            // getJSONObject lied and did not throw an exception like it said it would,
+            // so I am using optJSONObject
+            JSONObject location = object.optJSONObject("location");
+            if(location != null) {
+                this.locationName = location.optString("name");
+            }
+
+            JSONObject comments = object.optJSONObject("comments");
+            if(comments != null) {
+                this.numComments = comments.optInt("count");
+            }
 
         } catch(JSONException e) {
             e.printStackTrace();
@@ -128,7 +143,6 @@ public class Post {
     }
 
     public String getNumLikes() {
-        DecimalFormat formatter = new DecimalFormat("#,###");
         return formatter.format(numLikes);
     }
 
@@ -142,6 +156,18 @@ public class Post {
 
     public void setLocationName(String locationName) {
         this.locationName = locationName;
+    }
+
+    public int getNumComments() {
+        return numComments;
+    }
+
+    public String getNumCommentsFormatted() {
+        return formatter.format(numComments);
+    }
+
+    public void setNumComments(int numComments) {
+        this.numComments = numComments;
     }
 
 }

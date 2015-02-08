@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
         TextView numLikes;
         TextView captionText;
         ImageView pin;
+        Button commentsBtn;
     }
 
     @Override
@@ -53,6 +55,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
             viewHolder.numLikes = (TextView) convertView.findViewById(R.id.tvLikes);
             viewHolder.captionText = (TextView) convertView.findViewById(R.id.tvCaptionText);
             viewHolder.pin = (ImageView) convertView.findViewById(R.id.ivPin);
+            viewHolder.commentsBtn = (Button) convertView.findViewById(R.id.btnComments);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -70,12 +73,20 @@ public class PostAdapter extends ArrayAdapter<Post> {
         Picasso.with(getContext()).load(post.getPhotoUrl()).into(viewHolder.photo);
         viewHolder.captionText.setText(Html.fromHtml("<b><font color='#1c5380'>" + post.getUsername() + "</font></b> " + post.getCaption()));
         viewHolder.numLikes.setText(post.getNumLikes() + " likes");
+
         if(post.getLocationName() == null) {
             viewHolder.pin.setVisibility(View.GONE);
             viewHolder.locationName.setVisibility(View.GONE);
         } else {
             viewHolder.pin.setVisibility(View.VISIBLE);
             viewHolder.locationName.setVisibility(View.VISIBLE);
+        }
+
+        if(post.getNumComments() > 5) {
+            viewHolder.commentsBtn.setText("view all " + post.getNumCommentsFormatted() + " comments");
+            viewHolder.commentsBtn.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.commentsBtn.setVisibility(View.GONE);
         }
 
         return convertView;

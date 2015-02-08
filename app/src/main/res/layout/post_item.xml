@@ -114,11 +114,24 @@
 
     <TextView
         android:id="@+id/tvCaptionText"
+        android:layout_below="@id/likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:textSize="12sp"
-        android:layout_below="@id/likes"
         android:text="This is the best photo that was ever taken and you should Like it"/>
 
+    <Button
+        android:id="@+id/btnComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:minHeight="0dp"
+        android:layout_marginLeft="10dp"
+        android:text="view all 100 comments"
+        android:textAllCaps="false"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        android:layout_below="@id/tvCaptionText"/>
+    
 </RelativeLayout>
