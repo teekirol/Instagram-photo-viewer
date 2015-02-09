@@ -32,7 +32,7 @@
             android:textColor="#1c5380"
             android:textStyle="bold"
             android:text="teekirol"
-            android:textSize="12sp"/>
+            android:textSize="14sp"/>
         <ImageView
             android:id="@+id/ivPin"
             android:layout_below="@id/tvUsername"
@@ -51,7 +51,7 @@
             android:layout_marginTop="0dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="3dp"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:gravity="center_vertical"
             android:textColor="#53A3E1"
             android:text="Golden Gate Bridge"/>
@@ -63,7 +63,7 @@
             android:layout_alignParentRight="true"
             android:textColor="#999999"
             android:gravity="center"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:text="10h"/>
         <ImageView
             android:id="@+id/clockIcon"
@@ -108,7 +108,7 @@
             android:layout_marginLeft="5dp"
             android:textColor="#1c5380"
             android:textStyle="bold"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:text="10 likes"/>
      </RelativeLayout>
 
@@ -118,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:text="This is the best photo that was ever taken and you should Like it"/>
 
     <Button
@@ -131,14 +131,14 @@
         android:text="view all 100 comments"
         android:textAllCaps="false"
         android:textColor="#999999"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:layout_below="@id/tvCaptionText"/>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnComments"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:id="@+id/comment1"/>
@@ -147,7 +147,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/comment1"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:id="@+id/comment2"/>
