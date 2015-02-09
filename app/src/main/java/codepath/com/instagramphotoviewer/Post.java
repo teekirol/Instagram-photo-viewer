@@ -18,10 +18,10 @@ public class Post {
     public int numLikes;
     public String locationName;
     public int numComments;
-    public String comment1Author;
-    public String comment1Text;
-    public String comment2Author;
-    public String comment2Text;
+    public String comment1Author = "";
+    public String comment1Text = "";
+    public String comment2Author = "";
+    public String comment2Text = "";
 
     private static final int WEEKS_IN_A_YEAR = 52;
     private static final int WEEKS_IN_A_MONTH = 4;
