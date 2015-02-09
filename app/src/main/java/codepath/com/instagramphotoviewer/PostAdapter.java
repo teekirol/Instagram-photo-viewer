@@ -82,18 +82,18 @@ public class PostAdapter extends ArrayAdapter<Post> {
 
         viewHolder.username.setText(post.getUsername());
         viewHolder.postAge.setText(post.getCreatedTime());
-        viewHolder.locationName.setText(post.getLocationName());
         Picasso.with(getContext()).load(post.getPhotoUrl()).into(viewHolder.photo);
         // I don't know how I feel about this view stuff in here
         viewHolder.captionText.setText(commentFormat(post.getUsername(), post.getCaption()));
         viewHolder.numLikes.setText(post.getNumLikes() + " likes");
 
-        if(post.getLocationName() == null) {
+        if(post.getLocationName() == null || post.getLocationName().isEmpty()) {
             viewHolder.pin.setVisibility(View.GONE);
             viewHolder.locationName.setVisibility(View.GONE);
         } else {
             viewHolder.pin.setVisibility(View.VISIBLE);
             viewHolder.locationName.setVisibility(View.VISIBLE);
+            viewHolder.locationName.setText(post.getLocationName());
         }
 
         if(post.getNumComments() > 2) {
