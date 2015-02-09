@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.media.Image;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,16 @@ public class PostAdapter extends ArrayAdapter<Post> {
         TextView captionText;
         ImageView pin;
         Button commentsBtn;
+        TextView comment1;
+        TextView comment2;
+    }
+
+    private static String linkTextStyle(String txt) {
+        return "<b><font color='#1c5380'>" + txt + "</font></b>";
+    }
+
+    private static Spanned commentFormat(String author, String text) {
+        return Html.fromHtml(linkTextStyle(author) + " " + text);
     }
 
     @Override
@@ -56,6 +67,8 @@ public class PostAdapter extends ArrayAdapter<Post> {
             viewHolder.captionText = (TextView) convertView.findViewById(R.id.tvCaptionText);
             viewHolder.pin = (ImageView) convertView.findViewById(R.id.ivPin);
             viewHolder.commentsBtn = (Button) convertView.findViewById(R.id.btnComments);
+            viewHolder.comment1 = (TextView) convertView.findViewById(R.id.comment1);
+            viewHolder.comment2 = (TextView) convertView.findViewById(R.id.comment2);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -71,7 +84,8 @@ public class PostAdapter extends ArrayAdapter<Post> {
         viewHolder.postAge.setText(post.getCreatedTime());
         viewHolder.locationName.setText(post.getLocationName());
         Picasso.with(getContext()).load(post.getPhotoUrl()).into(viewHolder.photo);
-        viewHolder.captionText.setText(Html.fromHtml("<b><font color='#1c5380'>" + post.getUsername() + "</font></b> " + post.getCaption()));
+        // I don't know how I feel about this view stuff in here
+        viewHolder.captionText.setText(commentFormat(post.getUsername(), post.getCaption()));
         viewHolder.numLikes.setText(post.getNumLikes() + " likes");
 
         if(post.getLocationName() == null) {
@@ -82,11 +96,23 @@ public class PostAdapter extends ArrayAdapter<Post> {
             viewHolder.locationName.setVisibility(View.VISIBLE);
         }
 
-        if(post.getNumComments() > 5) {
+        if(post.getNumComments() > 2) {
             viewHolder.commentsBtn.setText("view all " + post.getNumCommentsFormatted() + " comments");
             viewHolder.commentsBtn.setVisibility(View.VISIBLE);
         } else {
             viewHolder.commentsBtn.setVisibility(View.GONE);
+        }
+
+        if(!post.getComment1Text().isEmpty()) {
+            viewHolder.comment1.setText(commentFormat(post.getComment1Author(), post.getComment1Text()));
+        } else {
+            viewHolder.comment1.setVisibility(View.GONE);
+        }
+
+        if(!post.getComment2Text().isEmpty()) {
+            viewHolder.comment2.setText(commentFormat(post.getComment2Author(), post.getComment2Text()));
+        } else {
+            viewHolder.comment2.setVisibility(View.GONE);
         }
 
         return convertView;

@@ -18,7 +18,10 @@ public class Post {
     public int numLikes;
     public String locationName;
     public int numComments;
-    public ArrayList<JSONObject> latestComments;
+    public String comment1Author;
+    public String comment1Text;
+    public String comment2Author;
+    public String comment2Text;
 
     private static final int WEEKS_IN_A_YEAR = 52;
     private static final int WEEKS_IN_A_MONTH = 4;
@@ -28,8 +31,6 @@ public class Post {
     private static final String MINUTES_SUFFIX = "m";
     private static final String SECONDS_SUFFIX = "s";
 
-    private static final int NUM_DISPLAY_COMMENTS = 5;
-
     private DecimalFormat formatter = new DecimalFormat("#,###");
 
     public Post(JSONObject object) {
@@ -37,7 +38,6 @@ public class Post {
 
             JSONObject user = object.getJSONObject("user");
             this.username = user.getString("username");
-            System.out.println(this.username);
             this.avatarUrl = user.getString("profile_picture");
 
             JSONObject caption = object.getJSONObject("caption");
@@ -60,6 +60,14 @@ public class Post {
             JSONObject comments = object.optJSONObject("comments");
             if(comments != null) {
                 this.numComments = comments.optInt("count");
+                JSONArray commentList = comments.optJSONArray("data");
+                // I am just assuming these are ordered from new to old
+                JSONObject comment1 = commentList.getJSONObject(0);
+                this.comment1Text = comment1.optString("text");
+                this.comment1Author = comment1.getJSONObject("from").optString("username");
+                JSONObject comment2 = commentList.getJSONObject(1);
+                this.comment2Text = comment2.optString("text");
+                this.comment2Author = comment2.getJSONObject("from").optString("username");
             }
 
         } catch(JSONException e) {
@@ -168,6 +176,38 @@ public class Post {
 
     public void setNumComments(int numComments) {
         this.numComments = numComments;
+    }
+
+    public String getComment1Author() {
+        return comment1Author;
+    }
+
+    public void setComment1Author(String comment1Author) {
+        this.comment1Author = comment1Author;
+    }
+
+    public String getComment1Text() {
+        return comment1Text;
+    }
+
+    public void setComment1Text(String comment1Text) {
+        this.comment1Text = comment1Text;
+    }
+
+    public String getComment2Author() {
+        return comment2Author;
+    }
+
+    public void setComment2Author(String comment2Author) {
+        this.comment2Author = comment2Author;
+    }
+
+    public String getComment2Text() {
+        return comment2Text;
+    }
+
+    public void setComment2Text(String comment2Text) {
+        this.comment2Text = comment2Text;
     }
 
 }
