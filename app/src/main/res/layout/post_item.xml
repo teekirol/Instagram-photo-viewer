@@ -17,7 +17,6 @@
             android:layout_height="40dp"
             android:layout_marginRight="10dp"
             android:contentDescription="avatar"
-            android:src="@drawable/ic_launcher"
             android:layout_alignParentLeft="true"/>
 
         <RelativeLayout
@@ -76,13 +75,14 @@
             android:layout_alignBottom="@id/ivAvatar"
             android:layout_alignTop="@id/ivAvatar"/>
     </RelativeLayout>
+
     <ImageView
         android:id="@+id/ivPhoto"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
         android:layout_below="@id/top"
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/placeholder"
         android:adjustViewBounds="true"/>
 
     <RelativeLayout
@@ -118,8 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:textSize="14sp"
-        android:text="This is the best photo that was ever taken and you should Like it"/>
+        android:textSize="14sp"/>
 
     <Button
         android:id="@+id/btnComments"

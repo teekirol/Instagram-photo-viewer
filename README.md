@@ -2,8 +2,6 @@
 
 This is a read-only Android application for viewing popular photos on Instagram.
 
-Time spent: ~14 hours total
-
 Completed user stories:
 
  * [x] Required: User can scroll through current popular photos from Instagram
@@ -12,7 +10,7 @@ Completed user stories:
  * [x] Optional: Show latest 2 comments for each photo
  * [x] Optional: Add pull-to-refresh for popular stream with SwipeRefreshLayout
  * [x] Optional: Display each user profile image using a RoundedImageView
- * [ ] Optional: Display a nice default placeholder graphic for each image during loading
+ * [x] Optional: Display a nice default placeholder graphic for each image during loading
  * [ ] Bonus: Allow user to view all comments for an image within a separate activity or dialog fragment
  * [ ] Bonus: Allow video posts to be played in full-screen using the VideoView
 

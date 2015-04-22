@@ -82,7 +82,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
 
         viewHolder.username.setText(post.getUsername());
         viewHolder.postAge.setText(post.getCreatedTime());
-        Picasso.with(getContext()).load(post.getPhotoUrl()).into(viewHolder.photo);
+        Picasso.with(getContext()).load(post.getPhotoUrl()).placeholder(R.drawable.placeholder).into(viewHolder.photo);
         // I don't know how I feel about this view stuff in here
         viewHolder.captionText.setText(commentFormat(post.getUsername(), post.getCaption()));
         viewHolder.numLikes.setText(post.getNumLikes() + " likes");
