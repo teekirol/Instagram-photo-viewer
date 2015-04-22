@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="10dp">
+    android:paddingBottom="15dp">
 
     <RelativeLayout
         android:id="@+id/top"
-        android:padding="10dp"
+        android:padding="15dp"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:gravity="center_vertical">
@@ -15,7 +15,7 @@
             android:id="@+id/ivAvatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="15dp"
             android:contentDescription="avatar"
             android:layout_alignParentLeft="true"/>
 
@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_below="@id/ivPhoto"
-        android:padding="10dp">
+        android:padding="15dp">
 
         <ImageView
             android:id="@+id/heart"
@@ -117,7 +117,7 @@
         android:layout_below="@id/likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:textSize="14sp"/>
 
     <Button
@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
         android:minHeight="0dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:text="view all 100 comments"
         android:textAllCaps="false"
         android:textColor="#999999"
@@ -138,8 +138,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/btnComments"
         android:textSize="14sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:id="@+id/comment1"/>
 
     <TextView
@@ -147,8 +147,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/comment1"
         android:textSize="14sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:id="@+id/comment2"/>
 
 </RelativeLayout>
