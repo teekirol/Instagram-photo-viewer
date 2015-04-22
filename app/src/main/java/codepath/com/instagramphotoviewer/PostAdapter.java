@@ -1,10 +1,8 @@
 package codepath.com.instagramphotoviewer;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.media.Image;
-import android.text.Html;
-import android.text.Spanned;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +15,9 @@ import com.makeramen.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+
+import static codepath.com.instagramphotoviewer.CommentAdapter.commentFormat;
 
 public class PostAdapter extends ArrayAdapter<Post> {
 
@@ -39,14 +37,6 @@ public class PostAdapter extends ArrayAdapter<Post> {
         Button commentsBtn;
         TextView comment1;
         TextView comment2;
-    }
-
-    private static String linkTextStyle(String txt) {
-        return "<b><font color='#1c5380'>" + txt + "</font></b>";
-    }
-
-    private static Spanned commentFormat(String author, String text) {
-        return Html.fromHtml(linkTextStyle(author) + " " + text);
     }
 
     @Override
@@ -78,7 +68,9 @@ public class PostAdapter extends ArrayAdapter<Post> {
             .oval(true)
             .build();
 
-        Picasso.with(getContext()).load(post.getAvatarUrl()).fit().transform(transformation).into(viewHolder.avatar);
+        Picasso.with(getContext()).load(post.getAvatarUrl()).fit().transform(transformation)
+                .placeholder(R.drawable.user_placeholder)
+                .into(viewHolder.avatar);
 
         viewHolder.username.setText(post.getUsername());
         viewHolder.postAge.setText(post.getCreatedTime());
@@ -99,6 +91,15 @@ public class PostAdapter extends ArrayAdapter<Post> {
         if(post.getNumComments() > 2) {
             viewHolder.commentsBtn.setText("view all " + post.getNumCommentsFormatted() + " comments");
             viewHolder.commentsBtn.setVisibility(View.VISIBLE);
+            final String mediaId = post.getId();
+            viewHolder.commentsBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getContext(), CommentsActivity.class);
+                    i.putExtra("mediaId", mediaId);
+                    ((Activity) getContext()).startActivity(i);
+                }
+            });
         } else {
             viewHolder.commentsBtn.setVisibility(View.GONE);
         }

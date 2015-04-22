@@ -1,18 +1,19 @@
 package codepath.com.instagramphotoviewer;
 
-import org.joda.time.DateTime;
-import org.joda.time.Period;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Post {
 
+    public String id;
     public String username;
     public String avatarUrl;
-    public String createdTime;
+    public Date createdTime;
     public String caption;
     public String photoUrl;
     public int numLikes;
@@ -23,25 +24,19 @@ public class Post {
     public String comment2Author = "";
     public String comment2Text = "";
 
-    private static final int WEEKS_IN_A_YEAR = 52;
-    private static final int WEEKS_IN_A_MONTH = 4;
-    private static final String WEEKS_SUFFIX = "w";
-    private static final String DAYS_SUFFIX = "d";
-    private static final String HOURS_SUFFIX = "h";
-    private static final String MINUTES_SUFFIX = "m";
-    private static final String SECONDS_SUFFIX = "s";
-
     private DecimalFormat formatter = new DecimalFormat("#,###");
 
     public Post(JSONObject object) {
         try {
+
+            this.id = object.getString("id");
 
             JSONObject user = object.getJSONObject("user");
             this.username = user.getString("username");
             this.avatarUrl = user.getString("profile_picture");
 
             JSONObject caption = object.getJSONObject("caption");
-            this.createdTime = caption.getString("created_time");
+            this.createdTime = new Date(Long.parseLong(caption.getString("created_time"))*1000);
             this.caption = caption.getString("text");
 
             JSONObject images = object.getJSONObject("images");
@@ -105,33 +100,15 @@ public class Post {
     }
 
     public String getCreatedTime() {
-        try {
-            // The time from Instagram is seconds from the epoch, while DateTime expects milliseconds
-            DateTime d = new DateTime(Long.parseLong(createdTime)*1000);
-            Period p = new Period(d, DateTime.now());
-            if(p.getYears() > 0) {
-                return WEEKS_IN_A_YEAR*p.getYears() + WEEKS_SUFFIX;
-            } else if(p.getMonths() > 0) {
-                return WEEKS_IN_A_MONTH*p.getMonths() + WEEKS_SUFFIX;
-            } else if(p.toStandardWeeks().getWeeks() > 0) {
-                return p.toStandardWeeks().getWeeks() + WEEKS_SUFFIX;
-            } else if(p.toStandardDays().getDays() > 0) {
-                return p.toStandardDays().getDays() + DAYS_SUFFIX;
-            } else if(p.toStandardHours().getHours() > 0) {
-                return p.toStandardHours().getHours() + HOURS_SUFFIX;
-            } else if(p.toStandardMinutes().getMinutes() > 0) {
-                return p.toStandardMinutes().getMinutes() + MINUTES_SUFFIX;
-            } else {
-                return p.toStandardSeconds().getSeconds() + SECONDS_SUFFIX;
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            return "";
-        }
+        return RelativeTimeStampHelper.shortRelativeTime(createdTime);
     }
 
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCaption() {

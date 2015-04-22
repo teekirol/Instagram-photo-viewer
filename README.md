@@ -11,7 +11,7 @@ Completed user stories:
  * [x] Optional: Add pull-to-refresh for popular stream with SwipeRefreshLayout
  * [x] Optional: Display each user profile image using a RoundedImageView
  * [x] Optional: Display a nice default placeholder graphic for each image during loading
- * [ ] Bonus: Allow user to view all comments for an image within a separate activity or dialog fragment
+ * [x] Bonus: Allow user to view all comments for an image within a separate activity or dialog fragment
  * [ ] Bonus: Allow video posts to be played in full-screen using the VideoView
 
 Walkthrough of all user stories:

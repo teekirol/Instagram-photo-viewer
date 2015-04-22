@@ -15,6 +15,11 @@ public class InstagramRestClient {
         get("media/popular", params, responseHandler);
     }
 
+    public static void getRecentComments(String mediaId, AsyncHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams("client_id", CLIENT_ID);
+        get("media/" + mediaId + "/comments", params, responseHandler);
+    }
+
     private static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
